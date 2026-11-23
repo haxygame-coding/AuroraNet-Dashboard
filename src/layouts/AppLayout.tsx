@@ -1,0 +1,99 @@
+"use client";
+
+import "@/utils/translationGuard";
+import "../app/globals.css";
+import { DisableDarkReader } from "@components/DisableDarkReader";
+import { TooltipProvider } from "@components/Tooltip";
+import { cn } from "@utils/helpers";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Viewport } from "next";
+import localFont from "next/font/local";
+import React, { Suspense } from "react";
+import { Toaster } from "sonner";
+import OIDCProvider from "@/auth/OIDCProvider";
+import { useAWSMarketplace } from "@/cloud/aws/useAWSMarketplace";
+import FullScreenLoading from "@/components/ui/FullScreenLoading";
+import AnalyticsProvider, {
+  GoogleTagManagerHeadScript,
+} from "@/contexts/AnalyticsProvider";
+import DialogProvider from "@/contexts/DialogProvider";
+import ErrorBoundaryProvider from "@/contexts/ErrorBoundary";
+import InstanceSetupProvider from "@/contexts/InstanceSetupProvider";
+import { NavigationEvents } from "@/contexts/NavigationEvents";
+import { ThemeProvider } from "@/contexts/ThemeProvider";
+import { useSignupSource } from "@/hooks/useSignupSource";
+
+const inter = localFont({
+  src: "../assets/fonts/Inter.ttf",
+  display: "swap",
+});
+
+// Extend dayjs with relativeTime plugin
+dayjs.extend(relativeTime);
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function AppLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  useAWSMarketplace();
+  useSignupSource();
+
+  return (
+    // suppressHydrationWarning: the pre-paint script below rewrites this
+    // element's class and color-scheme before React hydrates it.
+    <html
+      lang="en"
+      className="dark"
+      style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Set the theme class and color-scheme before first paint to avoid
+            a flash. Mirrors ThemeProvider (storageKey "auroranet-theme", default
+            "dark", system-aware) — required because the provider only applies
+            them in an effect, after hydration. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var r=document.documentElement;try{var t=localStorage.getItem('auroranet-theme')||'dark';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);r.classList[d?'add':'remove']('dark');r.style.colorScheme=d?'dark':'light';}catch(e){r.classList.add('dark');r.style.colorScheme='dark';}})();`,
+          }}
+        />
+        <GoogleTagManagerHeadScript />
+      </head>
+      <body className={cn(inter.className)} data-matomo-mask>
+        <Suspense fallback={<FullScreenLoading />}>
+          <AnalyticsProvider>
+            <DialogProvider>
+              <ThemeProvider>
+                <ErrorBoundaryProvider>
+                  <InstanceSetupProvider>
+                    <OIDCProvider>
+                      <TooltipProvider delayDuration={0}>
+                        {children}
+                      </TooltipProvider>
+                    </OIDCProvider>
+                  </InstanceSetupProvider>
+                </ErrorBoundaryProvider>
+              </ThemeProvider>
+            </DialogProvider>
+            <Toaster
+              position="top-center"
+              duration={3000}
+              toastOptions={{ unstyled: true }}
+              style={{ "--width": "28rem" } as React.CSSProperties}
+              gap={0}
+              visibleToasts={5}
+              offset="12px"
+            />
+            <NavigationEvents />
+            <DisableDarkReader />
+          </AnalyticsProvider>
+        </Suspense>
+      </body>
+    </html>
+  );
+}

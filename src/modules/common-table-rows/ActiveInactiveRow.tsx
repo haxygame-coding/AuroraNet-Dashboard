@@ -1,0 +1,64 @@
+import TextWithTooltip from "@components/ui/TextWithTooltip";
+import { cn } from "@utils/helpers";
+import React from "react";
+import CircleIcon from "@/assets/icons/CircleIcon";
+
+type Props = {
+  active: boolean;
+  children?: React.ReactNode;
+  inactiveDot?: "gray" | "red";
+  leftSection?: React.ReactNode;
+  text?: string | React.ReactNode;
+  className?: string;
+  additionalInfo?: React.ReactNode;
+  "data-testid"?: string;
+  /** Truncate the text at the available width instead of a fixed length. */
+  fluid?: boolean;
+};
+
+export default function ActiveInactiveRow({
+  active,
+  children,
+  text,
+  leftSection,
+  inactiveDot = "gray",
+  className,
+  additionalInfo,
+  "data-testid": dataTestId,
+  fluid = false,
+}: Readonly<Props>) {
+  return (
+    <div
+      className={cn(
+        "gap-3 text-nb-gray-300 dark:text-neutral-300 min-w-0",
+        className,
+      )}
+      data-testid={dataTestId}
+    >
+      {leftSection}
+      <div className={cn("flex flex-col gap-1", fluid && "min-w-0")}>
+        <div className={"flex gap-2.5 items-start"}>
+          <CircleIcon
+            active={active}
+            size={8}
+            inactiveDot={inactiveDot}
+            className={"mt-[0.45rem] shrink-0"}
+          />
+          <div className={"flex flex-col min-w-0"}>
+            <div
+              className={"font-medium flex gap-2 items-center justify-start"}
+            >
+              <TextWithTooltip
+                text={text as string}
+                maxChars={25}
+                fluid={fluid}
+              />
+              {additionalInfo}
+            </div>
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

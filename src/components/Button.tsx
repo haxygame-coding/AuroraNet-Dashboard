@@ -1,0 +1,152 @@
+"use client";
+
+import { cva, VariantProps } from "class-variance-authority";
+import classNames from "classnames";
+import React, { forwardRef } from "react";
+
+export type ButtonVariants = VariantProps<typeof buttonVariants>;
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonVariants {
+  disabled?: boolean;
+  stopPropagation?: boolean;
+}
+
+export const buttonVariants = cva(
+  [
+    "relative",
+    "text-sm focus:z-10 focus:ring-2 font-medium  focus:outline-none whitespace-nowrap shadow-sm",
+    "inline-flex gap-2 items-center justify-center transition-colors focus:ring-offset-1",
+    "disabled:opacity-40 not-dark:disabled:opacity-60 disabled:cursor-not-allowed disabled:dark:text-nb-gray-300 dark:ring-offset-neutral-950/50",
+  ],
+  {
+    variants: {
+      variant: {
+        default: [
+          "bg-white hover:text-black focus:ring-neutral-200/50  enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:focus:ring-zinc-800/50 dark:bg-nb-gray dark:text-gray-400 dark:border-gray-700/30 dark:hover:text-white dark:hover:bg-zinc-800/50",
+        ],
+        primary: [
+          "border-transparent",
+          "dark:focus:ring-auroranet-600/50 dark:ring-offset-neutral-950/50 enabled:dark:bg-auroranet disabled:dark:bg-nb-gray-910 dark:text-gray-100 enabled:dark:hover:text-white enabled:dark:hover:bg-auroranet-500/80",
+          "enabled:bg-auroranet enabled:text-white enabled:focus:ring-auroranet-400/50 enabled:hover:bg-auroranet-500",
+          "disabled:bg-neutral-200 disabled:text-neutral-600 disabled:border-neutral-300 not-dark:disabled:!opacity-100 dark:disabled:border-transparent",
+        ],
+        secondary: [
+          "bg-white hover:text-black focus:ring-neutral-200/50 enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:ring-offset-neutral-950/50 dark:focus:ring-neutral-500/20  ",
+          "dark:bg-nb-gray-920 dark:text-gray-400 dark:border-gray-700/40 dark:hover:text-white dark:hover:bg-nb-gray-910",
+        ],
+        secondaryLighter: [
+          "bg-white hover:text-black focus:ring-neutral-200/50 enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:ring-offset-neutral-950/50 dark:focus:ring-neutral-500/20  ",
+          "dark:bg-nb-gray-900/70 dark:text-gray-400 dark:border-gray-700/70 dark:hover:text-white dark:hover:bg-nb-gray-800/60",
+        ],
+        input: [
+          "bg-white hover:text-black focus:ring-neutral-200/50 enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:ring-offset-neutral-950/50 dark:focus:ring-neutral-500/20  ",
+          "dark:bg-nb-gray-900  dark:text-gray-400  dark:border-nb-gray-700 dark:hover:bg-nb-gray-900/80",
+        ],
+        dropdown: [
+          "bg-white hover:text-black focus:ring-neutral-200/50 enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:ring-offset-neutral-950/50 dark:focus:ring-neutral-500/20  ",
+          "dark:bg-nb-gray-900/40 dark:text-gray-400 dark:border-nb-gray-900 dark:hover:bg-nb-gray-900/50",
+        ],
+        dotted: [
+          "bg-white hover:text-black focus:ring-neutral-200/50 enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900 border-dashed",
+          "dark:ring-offset-neutral-950/50 dark:focus:ring-neutral-500/20  ",
+          "dark:bg-nb-gray-900/30 dark:text-gray-400 dark:border-gray-500/40 dark:hover:text-white dark:hover:bg-nb-gray-900/50",
+        ],
+        tertiary: [
+          "bg-white hover:text-black focus:ring-neutral-200/50  enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:focus:ring-zinc-800/50 dark:bg-white dark:text-gray-800 dark:border-gray-700/40 dark:hover:bg-neutral-200 disabled:dark:bg-nb-gray-920 disabled:dark:text-nb-gray-300",
+        ],
+        white: [
+          "focus:ring-white/50 bg-white text-neutral-800 dark:text-gray-800 border-white outline-none hover:bg-neutral-50 dark:hover:bg-neutral-200 disabled:dark:bg-nb-gray-920 disabled:dark:text-nb-gray-300",
+          "disabled:dark:bg-nb-gray-900 disabled:dark:text-nb-gray-300 disabled:dark:border-nb-gray-900",
+        ],
+        outline: [
+          "bg-white hover:text-black focus:ring-neutral-200/50  enabled:hover:bg-neutral-50 border-nb-gray-700 text-neutral-900",
+          "dark:focus:ring-zinc-800/50 dark:bg-transparent dark:text-auroranet dark:border-auroranet dark:hover:bg-nb-gray-900/30",
+        ],
+        "danger-outline": [
+          "bg-transparent text-red-600 border-red-300 hover:bg-red-50 hover:border-red-400 focus:ring-red-500/30",
+          "enabled:dark:focus:ring-red-800/20 enabled:dark:focus:bg-red-950/40 enabled:hover:dark:bg-red-950/50 enabled:dark:hover:border-red-800/50 dark:bg-transparent dark:text-red-500 dark:border-transparent",
+        ],
+        "danger-text": [
+          "bg-transparent text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600 border-transparent !px-0 !shadow-none !py-0 focus:ring-red-500/30 ring-offset-nb-gray-950/50 rounded-sm",
+        ],
+        "default-outline": [
+          "ring-offset-nb-gray-950/50 focus:ring-nb-gray-500/20 !shadow-none dark:!shadow-sm",
+          "bg-transparent text-nb-gray-400 border-transparent hover:text-nb-gray-50 dark:hover:text-white hover:bg-nb-gray-900/30 hover:border-nb-gray-800/50",
+          "data-[state=open]:text-nb-gray-50 data-[state=open]:dark:text-white data-[state=open]:bg-nb-gray-900/30 data-[state=open]:border-nb-gray-800/50",
+        ],
+        danger: [
+          "enabled:bg-red-600 enabled:text-white enabled:hover:bg-red-700 enabled:focus:bg-red-700 enabled:focus:ring-red-400/50 border-red-600 dark:border-transparent disabled:bg-red-300 disabled:text-white",
+          "dark:focus:ring-red-700/20 dark:focus:bg-red-700 hover:dark:bg-red-700 dark:hover:border-red-800/50 dark:bg-red-600 dark:text-red-100",
+        ],
+      },
+      size: {
+        xs: "text-xs py-2 px-4",
+        xs2: "py-2 px-4",
+        sm: "text-sm py-2.5 px-4",
+        md: "text-md py-2.5 px-4",
+        lg: "text-lg py-2.5 px-4",
+      },
+      rounded: {
+        true: "rounded-md",
+        false: "",
+      },
+      border: {
+        0: "border-0",
+        /* No border-transparent here: it compiles after the variants' border
+           colors and would override them, leaving light mode outline-less.
+           Variants without a border color set border-transparent themselves. */
+        1: "border",
+        2: "border border-t-0 border-b-0",
+      },
+    },
+  },
+);
+
+const Button = forwardRef(
+  (
+    {
+      variant = "default",
+      rounded = true,
+      border = 1,
+      size = "md",
+      stopPropagation = true,
+      ...props
+    }: ButtonProps,
+    ref: React.ForwardedRef<HTMLButtonElement>,
+  ) => {
+    return (
+      <button
+        type="button"
+        {...props}
+        ref={ref}
+        className={classNames(
+          buttonVariants({
+            variant,
+            rounded,
+            border: border ? 1 : 0,
+            size: size,
+          }),
+          props.className,
+        )}
+        onClick={(e) => {
+          stopPropagation && e.stopPropagation();
+          props.onClick && props.onClick(e);
+        }}
+      >
+        {props.children}
+      </button>
+    );
+  },
+);
+
+Button.displayName = "Button";
+
+export default Button;

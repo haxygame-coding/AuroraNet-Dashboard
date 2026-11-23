@@ -1,0 +1,63 @@
+import { cn } from "@utils/helpers";
+import { cva, type VariantProps } from "class-variance-authority";
+import React from "react";
+
+const iconVariant = cva(
+  "rounded-md flex items-center justify-center border shadow-sm shrink-0",
+  {
+    variants: {
+      color: {
+        auroranet:
+          "bg-auroranet border-auroranet text-auroranet-950 dark:bg-auroranet-950 dark:text-auroranet",
+        blue: "bg-sky-600 border-sky-500 text-white dark:bg-sky-950 dark:text-sky-100",
+        "blue-darker":
+          "bg-sky-600 border-sky-500 text-white dark:bg-sky-950 dark:text-sky-500",
+        red: "bg-red-600 border-red-500 text-white dark:bg-red-950 dark:text-red-500",
+        gray: "bg-nb-gray-930 border-nb-gray-800 text-gray-500",
+        green:
+          "bg-green-600 border-green-500 text-white dark:bg-green-950 dark:text-green-500",
+        purple:
+          "bg-purple-600 border-purple-500 text-white dark:bg-purple-950 dark:text-purple-500",
+        indigo:
+          "bg-indigo-600 border-indigo-500 text-white dark:bg-indigo-950 dark:text-indigo-500",
+        yellow:
+          "bg-yellow-300 border-yellow-300 text-yellow-950 dark:bg-yellow-950 dark:border-yellow-400 dark:text-yellow-400",
+      },
+      size: {
+        small: "w-8 h-8",
+        medium: "w-10 h-10",
+        large: "w-12 h-12",
+      },
+    },
+  },
+);
+
+export type IconVariant = VariantProps<typeof iconVariant>;
+interface Props extends IconVariant {
+  icon: React.ReactNode;
+  margin?: string;
+  rounded?: boolean;
+}
+
+export default function SquareIcon({
+  color = "auroranet",
+  icon,
+  size = "medium",
+  margin = "mt-1",
+  rounded = false,
+}: Props) {
+  return (
+    <div
+      className={cn(
+        iconVariant({
+          color,
+          size,
+        }),
+        margin,
+        rounded && "rounded-full",
+      )}
+    >
+      {icon}
+    </div>
+  );
+}

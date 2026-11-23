@@ -1,0 +1,83 @@
+import { cleanup, render } from "@testing-library/react";
+import { Position } from "@xyflow/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+// The source node lookup: select-user-node carries no data.enabled, so the
+// helper's fallback reads false.
+vi.mock("@/modules/control-center/utils/helpers", () => ({
+  useSourceGroupEnabled: () => false,
+}));
+
+// Mocked rather than wrapped in the real ThemeProvider: the provider reads
+// window.matchMedia, which jsdom does not implement.
+const themeState = vi.hoisted(() => ({
+  resolvedTheme: "dark" as "light" | "dark",
+}));
+vi.mock("@/contexts/ThemeProvider", () => ({
+  useTheme: () => ({
+    theme: themeState.resolvedTheme,
+    resolvedTheme: themeState.resolvedTheme,
+    setTheme: () => undefined,
+  }),
+}));
+
+const { SimpleConnection } = await import("./SimpleConnection");
+
+afterEach(cleanup);
+beforeEach(() => {
+  themeState.resolvedTheme = "dark";
+});
+
+const edgeProps = {
+  id: "edge-1",
+  source: "select-user-node",
+  target: "peer-1",
+  sourceX: 0,
+  sourceY: 0,
+  targetX: 100,
+  targetY: 0,
+  sourcePosition: Position.Right,
+  targetPosition: Position.Left,
+};
+
+const renderEdge = (data?: { enabled?: boolean }) => {
+  const { container } = render(
+    <svg>
+      <SimpleConnection
+        {...(edgeProps as Parameters<typeof SimpleConnection>[0])}
+        data={data}
+      />
+    </svg>,
+  );
+  return container.querySelector("path");
+};
+
+describe("SimpleConnection", () => {
+  it("honours the edge's own enabled flag over the source node's", () => {
+    const path = renderEdge({ enabled: true });
+    expect(path?.style.opacity).toBe("1");
+  });
+
+  it("dims when the edge itself is disabled", () => {
+    const path = renderEdge({ enabled: false });
+    expect(path?.style.opacity).toBe("0.6");
+  });
+
+  it("falls back to the source node's enabled when the edge carries none", () => {
+    const path = renderEdge(undefined);
+    expect(path?.style.opacity).toBe("0.6");
+  });
+
+  // The stroke must stay inline — xyflow's .react-flow__edge-path would
+  // override a stroke-* utility.
+  it("keeps its neutral grey stroke in dark mode", () => {
+    const path = renderEdge({ enabled: true });
+    expect(path?.style.stroke).toBe("rgb(125, 125, 125)");
+  });
+
+  it("strokes with the light ramp token in light mode", () => {
+    themeState.resolvedTheme = "light";
+    const path = renderEdge({ enabled: true });
+    expect(path?.style.stroke).toBe("rgb(var(--nb-gray-700))");
+  });
+});
