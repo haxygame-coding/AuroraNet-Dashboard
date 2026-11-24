@@ -6,7 +6,7 @@ import DashboardLayout from "@/layouts/DashboardLayout";
 import { settle } from "@/storybook/wait";
 
 const ANNOUNCEMENTS_URL =
-  "GET https://raw.githubusercontent.com/ghcr.io/haxygame/auroranet-dashboard/main/announcements.json";
+  "GET https://raw.githubusercontent.com/haxygame-coding/AuroraNet-Dashboard/main/announcements.json";
 
 /* The banner shows the first open announcement from the remote
    announcements.json, so each story serves exactly one. */

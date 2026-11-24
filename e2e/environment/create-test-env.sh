@@ -6,19 +6,19 @@ set -e
 # tests to a specific management-cloud build (e.g., a feature branch image).
 MANAGEMENT_IMAGE_TAG="${MANAGEMENT_IMAGE_TAG:-main}"
 MANAGEMENT_IMAGE_OVERRIDE="${MANAGEMENT_IMAGE:-}"
-MANAGEMENT_IMAGE="${MANAGEMENT_IMAGE_OVERRIDE:-ghcr.io/haxygame/management-cloud:${MANAGEMENT_IMAGE_TAG}}"
+MANAGEMENT_IMAGE="${MANAGEMENT_IMAGE_OVERRIDE:-ghcr.io/haxygame-coding/management-cloud:${MANAGEMENT_IMAGE_TAG}}"
 echo "Using ${MANAGEMENT_IMAGE}"
 
 # Tag of the reverse-proxy image to pull. Override via env var to pin the
 # tests to a specific reverse-proxy build (e.g., a feature branch image).
 REVERSE_PROXY_IMAGE_TAG="${REVERSE_PROXY_IMAGE_TAG:-main}"
 REVERSE_PROXY_IMAGE_OVERRIDE="${REVERSE_PROXY_IMAGE:-}"
-REVERSE_PROXY_IMAGE="${REVERSE_PROXY_IMAGE_OVERRIDE:-ghcr.io/haxygame/auroranet-proxy:${REVERSE_PROXY_IMAGE_TAG}}"
+REVERSE_PROXY_IMAGE="${REVERSE_PROXY_IMAGE_OVERRIDE:-ghcr.io/haxygame-coding/auroranet-proxy:${REVERSE_PROXY_IMAGE_TAG}}"
 echo "Using ${REVERSE_PROXY_IMAGE}"
 
 SIGNAL_IMAGE_TAG="${SIGNAL_IMAGE_TAG:-main}"
 SIGNAL_IMAGE_OVERRIDE="${SIGNAL_IMAGE:-}"
-SIGNAL_IMAGE="${SIGNAL_IMAGE_OVERRIDE:-ghcr.io/haxygame/signal:${SIGNAL_IMAGE_TAG}}"
+SIGNAL_IMAGE="${SIGNAL_IMAGE_OVERRIDE:-ghcr.io/haxygame-coding/signal:${SIGNAL_IMAGE_TAG}}"
 echo "Using ${SIGNAL_IMAGE}"
 
 REVERSE_PROXY_PORT="${REVERSE_PROXY_PORT:-18443}"

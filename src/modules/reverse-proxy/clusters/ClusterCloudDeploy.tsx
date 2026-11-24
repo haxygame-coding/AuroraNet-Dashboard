@@ -110,7 +110,7 @@ chpasswd:
     content: |
       services:
         reverse-proxy:
-          image: ghcr.io/haxygame/auroranet-proxy:latest
+          image: ghcr.io/haxygame-coding/auroranet-proxy:latest
           restart: unless-stopped
           logging:
             driver: json-file

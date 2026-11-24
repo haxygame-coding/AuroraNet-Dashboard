@@ -15,7 +15,7 @@ Each tag also has a Red Hat UBI variant with the `-ubi` suffix (for example
 HTTP:
 
 ```shell
-docker run -d --rm -p 80:80 ghcr.io/haxygame/auroranet-dashboard:main
+docker run -d --rm -p 80:80 ghcr.io/haxygame-coding/auroranet-dashboard:main
 ```
 
 Using an SSL certificate from Let's Encrypt:
@@ -24,7 +24,7 @@ Using an SSL certificate from Let's Encrypt:
 docker run -d --rm -p 80:80 -p 443:443 \
   -e LETSENCRYPT_DOMAIN=app.mydomain.com \
   -e LETSENCRYPT_EMAIL=hello@mydomain.com \
-  ghcr.io/haxygame/auroranet-dashboard:main
+  ghcr.io/haxygame-coding/auroranet-dashboard:main
 ```
 
 For certificate generation, the server needs a public IP and a domain name
@@ -45,7 +45,7 @@ docker run -d --rm \
   -e AUTH_SUPPORTED_SCOPES='openid profile email' \
   -e USE_AUTH0=false \
   -e AURORANET_MGMT_API_ENDPOINT=https://api.example.com \
-  ghcr.io/haxygame/auroranet-dashboard:main-rootless
+  ghcr.io/haxygame-coding/auroranet-dashboard:main-rootless
 ```
 
 The rootless image does not include Certbot or expose HTTPS. Terminate TLS at

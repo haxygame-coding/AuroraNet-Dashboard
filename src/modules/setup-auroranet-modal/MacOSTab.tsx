@@ -167,15 +167,15 @@ export default function MacOSTab({
                   <p>Install AuroraNet </p>
                   <Code
                     codeToCopy={[
-                      `brew install haxygame/tap/auroranet`,
-                      `brew install --cask haxygame/tap/auroranet-ui`,
+                      `brew install haxygame-coding/tap/auroranet`,
+                      `brew install --cask haxygame-coding/tap/auroranet-ui`,
                     ].join("\n")}
                   >
                     <Code.Comment># for CLI only</Code.Comment>
-                    <Code.Line>brew install haxygame/tap/auroranet</Code.Line>
+                    <Code.Line>brew install haxygame-coding/tap/auroranet</Code.Line>
                     <Code.Comment># for GUI package</Code.Comment>
                     <Code.Line>
-                      brew install --cask haxygame/tap/auroranet-ui
+                      brew install --cask haxygame-coding/tap/auroranet-ui
                     </Code.Line>
                   </Code>
                 </Steps.Step>

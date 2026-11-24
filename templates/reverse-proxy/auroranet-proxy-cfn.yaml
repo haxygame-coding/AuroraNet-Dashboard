@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: >-
   AuroraNet Reverse Proxy - launches a single EC2 instance running the
-  ghcr.io/haxygame/auroranet-proxy container with ACME certificates. Point your proxy
+  ghcr.io/haxygame-coding/auroranet-proxy container with ACME certificates. Point your proxy
   domain's DNS A record at the instance IP after stack creation.
 
 Metadata:
@@ -66,7 +66,7 @@ Parameters:
   ImageTag:
     Type: String
     Default: latest
-    Description: ghcr.io/haxygame/auroranet-proxy image tag to run.
+    Description: ghcr.io/haxygame-coding/auroranet-proxy image tag to run.
   InstanceType:
     Type: String
     Default: t3.small
@@ -219,7 +219,7 @@ Resources:
               content: |
                 services:
                   reverse-proxy:
-                    image: ghcr.io/haxygame/auroranet-proxy:${ImageTag}
+                    image: ghcr.io/haxygame-coding/auroranet-proxy:${ImageTag}
                     restart: unless-stopped
                     logging:
                       driver: json-file

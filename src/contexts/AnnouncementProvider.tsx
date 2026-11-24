@@ -17,7 +17,7 @@ import { usePermissions } from "@/contexts/PermissionsProvider";
 const config = loadConfig();
 
 const ANNOUNCEMENTS_URL =
-  "https://raw.githubusercontent.com/ghcr.io/haxygame/auroranet-dashboard/main/announcements.json";
+  "https://raw.githubusercontent.com/haxygame-coding/AuroraNet-Dashboard/main/announcements.json";
 const STORAGE_KEY = "auroranet-announcements";
 const CACHE_DURATION_MS = 30 * 60 * 1000;
 

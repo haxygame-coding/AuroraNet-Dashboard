@@ -27,7 +27,7 @@ write_files:
     content: |
       services:
         reverse-proxy:
-          image: ghcr.io/haxygame/auroranet-proxy:{{IMAGE_TAG}}
+          image: ghcr.io/haxygame-coding/auroranet-proxy:{{IMAGE_TAG}}
           restart: unless-stopped
           logging:
             driver: json-file

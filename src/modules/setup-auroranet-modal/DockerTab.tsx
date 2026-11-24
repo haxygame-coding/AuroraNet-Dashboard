@@ -86,7 +86,7 @@ export default function DockerTab({
                   <span className={"text-auroranet"}>{GRPC_API_ORIGIN}</span> \
                 </Code.Line>
               )}
-              <Code.Line> haxygame/auroranet:latest</Code.Line>
+              <Code.Line> ghcr.io/haxygame-coding/auroranet-client:latest</Code.Line>
             </Code>
           </Steps.Step>
           <Steps.Step step={3 + offset} line={false}>

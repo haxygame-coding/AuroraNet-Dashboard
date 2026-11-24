@@ -3,8 +3,8 @@
 Run `bash create-test-env.sh` from this directory, then build and run the
 dashboard tests as described in [the E2E guide](../CLAUDE.md).
 
-The default images are `ghcr.io/haxygame/management-cloud:main`,
-`ghcr.io/haxygame/auroranet-proxy:main`, and `ghcr.io/haxygame/signal:main`.
+The default images are `ghcr.io/haxygame-coding/management-cloud:main`,
+`ghcr.io/haxygame-coding/auroranet-proxy:main`, and `ghcr.io/haxygame-coding/signal:main`.
 `MANAGEMENT_IMAGE_TAG`, `REVERSE_PROXY_IMAGE_TAG`, and `SIGNAL_IMAGE_TAG`
 select other tags and refresh them during setup. Signal runs inside the Compose
 network behind Caddy so embedded proxy clients can finish connecting when
@@ -75,8 +75,8 @@ proxy's access-control assertions.
 The separate **Reverse Proxy Target Access E2E** Actions workflow runs this
 traffic spec and its login prerequisites on pull requests. A line such as
 `reverse-proxy-tag: pr-7954` in the PR description selects that same published
-tag for `ghcr.io/haxygame/management`, `ghcr.io/haxygame/auroranet-proxy`, and
-`ghcr.io/haxygame/signal`; editing the description starts another run.
+tag for `ghcr.io/haxygame-coding/management`, `ghcr.io/haxygame-coding/auroranet-proxy`, and
+`ghcr.io/haxygame-coding/signal`; editing the description starts another run.
 Without that line, the tag defaults to `main`. Manual runs accept a
 `backend-tag` input. All three images must already be published, and management
 and proxy must include target access support. The job uses public images without

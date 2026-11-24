@@ -308,7 +308,7 @@
        DEFAULT (the app background) sits slightly below white so white
        inputs, buttons and cards stand in front of it.
        The ramp is pure neutral (R = G = B) and matches the desktop client's
-       light ramp (haxygame/auroranet#7344), with a near-white app background. */
+       light ramp (haxygame-coding/AuroraNet#7344), with a near-white app background. */
     --nb-gray-DEFAULT: 244 247 250;
     --nb-gray-50: 16 24 36;
     --nb-gray-100: 27 38 56;

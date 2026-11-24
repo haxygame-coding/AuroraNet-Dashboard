@@ -47,9 +47,9 @@ const json = (body: unknown, status = 200) =>
 /* Third-party calls the dashboard makes on its own; answered offline so
    screenshots never depend on what GitHub serves today. */
 const external: Record<string, unknown> = {
-  "https://raw.githubusercontent.com/ghcr.io/haxygame/auroranet-dashboard/main/announcements.json":
+  "https://raw.githubusercontent.com/haxygame-coding/AuroraNet-Dashboard/main/announcements.json":
     [],
-  "https://api.github.com/repos/haxygame/auroranet/releases/latest": {
+  "https://api.github.com/repos/haxygame-coding/AuroraNet/releases/latest": {
     tag_name: "v0.60.0",
     name: "v0.60.0",
   },

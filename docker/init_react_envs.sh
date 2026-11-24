@@ -96,7 +96,7 @@ echo "AuroraNet latest version: ${AURORANET_LATEST_VERSION}"
 FIRST_PARTY_CSP="pkgs.aurora-net.org"
 FIRST_PARTY_CSP_CONNECT_SRC="wss://*.aurora-net.org"
 THIRD_PARTY_CSP="*.licdn.com *.linkedin.com *.vector.co *.sibforms.com *.hotjar.com *.hotjar.io *.redditstatic.com pixel-config.reddit.com *.clarity.ms c.bing.com *.microsoft.com googleads.g.doubleclick.net pagead2.googlesyndication.com www.google.com www.googleadservices.com *.google-analytics.com *.googletagmanager.com analytics.google.com *.hubapi.com *.hs-banner.com *.hubspot.com *.hubspot.net js.hs-analytics.com *.hsforms.net *.hscollectedforms.net *.hs-analytics.net *.hsforms.com track.hubspot.com *.hsadspixel.net static.hsappstatic.net"
-THIRD_PARTY_CSP_CONNECT_SRC="https://api.github.com/repos/haxygame/auroranet/releases/latest https://raw.githubusercontent.com/ghcr.io/haxygame/auroranet-dashboard/ wss://ws.hotjar.com https://api.hetzner.cloud https://api.digitalocean.com"
+THIRD_PARTY_CSP_CONNECT_SRC="https://api.github.com/repos/haxygame-coding/AuroraNet/releases/latest https://raw.githubusercontent.com/haxygame-coding/AuroraNet-Dashboard/ wss://ws.hotjar.com https://api.hetzner.cloud https://api.digitalocean.com"
 THIRD_PARTY_CSP_SCRIPT_SRC="'sha256-7knV6EIjKUvCpYWE2rCYx8dYV2WCNb2bpTuitFXzBcA=' *.hs-scripts.com"
 
 CSP_DOMAINS=""

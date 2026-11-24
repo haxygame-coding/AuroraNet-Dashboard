@@ -4,7 +4,20 @@ import { OperatingSystem } from "@/interfaces/OperatingSystem";
 import { AuroraNetRelease } from "@/interfaces/Version";
 
 const GITHUB_API_ENDPOINT = "https://api.github.com";
+const LATEST_RELEASE_URL = `${GITHUB_API_ENDPOINT}/repos/haxygame-coding/AuroraNet/releases/latest`;
+const RELEASES_URL = `${GITHUB_API_ENDPOINT}/repos/haxygame-coding/AuroraNet/releases?per_page=1`;
 const LATEST_RELEASE_CHECK_INTERVAL_IN_MINUTES = 10;
+
+/* /releases/latest omits prereleases, and AuroraNet publishes its releases as
+   prereleases, so fall back to the newest entry of the releases list. */
+const fetchLatestRelease = async (): Promise<any> => {
+  const latest = await fetch(LATEST_RELEASE_URL);
+  if (latest.ok) return latest.json();
+  const releases = await fetch(RELEASES_URL).then((response) =>
+    response.json(),
+  );
+  return Array.isArray(releases) ? releases[0] : undefined;
+};
 
 export const getLatestAuroraNetRelease = async (
   release?: AuroraNetRelease,
@@ -17,9 +30,8 @@ export const getLatestAuroraNetRelease = async (
     );
 
   if (runFetch) {
-    const data = (await fetch(
-      `${GITHUB_API_ENDPOINT}/repos/haxygame/auroranet/releases/latest`,
-    ).then((response) => response.json())) as any;
+    const data = await fetchLatestRelease();
+    if (data === undefined) return undefined;
 
     try {
       return {
